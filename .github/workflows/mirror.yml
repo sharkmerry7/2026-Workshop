@@ -22,6 +22,9 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan github.sie.sony.com >> ~/.ssh/known_hosts
-
+    
+          # Test SSH connection first
+          ssh -T git@github.sie.sony.com -i ~/.ssh/id_ed25519 || true
+    
           git remote add internal git@github.sie.sony.com:msherry/mirrortest.git
           git push internal --mirror
